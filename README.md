@@ -6,7 +6,7 @@ Enhanced Edition: add singlePinch singleRotate singleRotate
 
 # Preview
 
-You can touch this → [http://alloyteam.github.io/AlloyFinger/](http://alloyteam.github.io/AlloyFinger/)
+You can touch this → [https://ilgei.github.io/itouch/example/](https://ilgei.github.io/itouch/example/)
 
 # Usage
 
