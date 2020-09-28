@@ -6,7 +6,7 @@ import { minify } from 'uglify-es';
 import pkjson from './package.json';
 
 const prjName = pkjson.name;
-const outputModuleName = 'itouch';
+const outputModuleName = 'AlloyFinger';
 
 const banner = `/*!
 * ${prjName} v${pkjson.version}

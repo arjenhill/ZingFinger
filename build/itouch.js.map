@@ -1,1 +1,0 @@
-{"version":3,"file":"itouch.js","sources":["../src/core/itouch.js"],"sourcesContent":["export default {\n  getLen(v) {\n    return Math.sqrt(v.x * v.x + v.y * v.y);\n  },\n};\n"],"names":["v","Math","sqrt","x","y"],"mappings":";;;;;;AAAA,aAAe;QAAA,kBACNA,CADM,EACH;WACDC,KAAKC,IAAL,CAAUF,EAAEG,CAAF,GAAMH,EAAEG,CAAR,GAAYH,EAAEI,CAAF,GAAMJ,EAAEI,CAA9B,CAAP;;CAFJ;;;;;;;;"}

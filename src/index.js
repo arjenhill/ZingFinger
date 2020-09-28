@@ -1,3 +1,3 @@
-import itouch from "./core/itouch";
+import AlloyFinger from "./core/itouch";
 
-export default itouch;
+export default AlloyFinger;

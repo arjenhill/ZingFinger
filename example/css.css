@@ -1,0 +1,161 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color: #ccc;
+  text-align: center;
+  font: 14px / 1.5 "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei",
+    "Hiragino Sans GB", "Heiti SC", "WenQuanYi Micro Hei", sans-serif;
+}
+.header {
+  background-color: #333;
+  height: 40px;
+  color: white;
+  text-align: left;
+  text-indent: 20px;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 40px;
+}
+.title {
+  height: 30px;
+  color: #333333;
+  font-size: 20px;
+  line-height: 30px;
+}
+.example img {
+  width: 160px;
+}
+.imgBox {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #333333;
+}
+.swipeBox {
+  height: 160px;
+  width: 160px;
+  margin: 0 auto;
+  overflow: hidden;
+  font-size: 0;
+  position: relative;
+  border: 2px solid #ccc;
+  box-sizing: border-box;
+}
+.scroll {
+  width: 480px;
+  height: 160px;
+  white-space: nowrap;
+}
+
+.nuclear-nav {
+  position: absolute;
+  bottom: 6px;
+  right: 10px;
+}
+
+.nuclear-nav a {
+  display: inline-block;
+  background-color: white;
+  cursor: pointer;
+  width: 10px;
+  height: 10px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  margin-right: 5px;
+  border: 1px solid #808080;
+}
+
+.nuclear-nav a.active {
+  background-color: #ffd800;
+}
+
+.longTapBox {
+  position: relative;
+  margin: 0 auto;
+  width: 160px;
+  height: 160px;
+  overflow: hidden;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+  user-select: none;
+  user-drag: none;
+  touch-callout: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.longTapBox img {
+  pointer-events: none;
+}
+
+.overlay2,
+.overlay {
+  background-color: rgba(70, 70, 70, 0.8);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 160px;
+  height: 160px;
+
+  display: none;
+}
+.overlay2 img,
+.overlay img {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 60px;
+  left: 60px;
+}
+.pb6 {
+  padding-bottom: 6px;
+}
+
+.ribbon {
+  top: 3.2em;
+  right: -3.7em;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  color: #fff;
+  display: block;
+  padding: 0.6em 3.5em;
+  position: fixed;
+  text-align: center;
+  text-decoration: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: green;
+  z-index: 10000;
+}
+
+.btn {
+  letter-spacing: 3px;
+  display: inline-block;
+
+  color: white;
+  width: 270px;
+  height: 45px;
+  font-size: 24px;
+  line-height: 45px;
+  background-color: green;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  text-decoration: none;
+}
+
+.footer {
+  height: 120px;
+}
+.linkCanvasBox {
+  margin-top: 10px;
+}
+.linkCanvasBox .btn {
+  font-size: 16px;
+}

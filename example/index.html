@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>example</title>
+    <script src="asset/transform.js"></script>
+    <script src="asset/to.js"></script>
+    <script src="../build/itouch.min.js"></script>
+    <link rel="stylesheet" href="css.css" />
+  </head>
+  <body>
+    <div class="header">AlloyFinger (Enhanced Edition)</div>
+    <div class="example">
+      <div class="title">pinch</div>
+      <div class="imgBox">
+        <img id="pinchImg" src="asset/test.png" />
+      </div>
+      <div class="title">rotate</div>
+      <div class="imgBox">
+        <img id="rotateImg" src="asset/test.png" />
+      </div>
+      <div class="title">pinch+rotate</div>
+      <div class="imgBox">
+        <img id="pinchRotateImg" src="asset/test.png" />
+      </div>
+      <div class="title">pressMove</div>
+      <div class="imgBox">
+        <img id="pressMoveImg" src="asset/test.png" />
+      </div>
+      <div class="title">doubleTap</div>
+      <div class="imgBox">
+        <img id="doubleTapImg" src="asset/test.png" />
+      </div>
+      <div class="title">swipe</div>
+      <div class="imgBox pb6">
+        <div class="swipeBox">
+          <div class="scroll" id="swipeScroll">
+            <img src="asset/test.png" /> <img src="asset/test2.png" />
+            <img src="asset/test3.png" />
+          </div>
+          <div class="nuclear-nav">
+            <a data-index="0" class="active"></a>
+            <a data-index="1" class=" "></a>
+            <a data-index="2" class=" "></a>
+          </div>
+        </div>
+      </div>
+      <div class="title">longTap</div>
+      <div class="imgBox pb6">
+        <div class="longTapBox" id="longTapBox">
+          <img id="longTapImg" src="asset/test.png" />
+          <div class="overlay" id="overlay">
+            <img src="asset/yes.png" />
+          </div>
+        </div>
+      </div>
+
+      <div class="title">tap</div>
+      <div class="imgBox pb6">
+        <div class="longTapBox" id="tapBox">
+          <img src="asset/test.png" />
+          <div class="overlay2" id="overlay2">
+            <img src="asset/yes.png" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./example.js"></script>
+  </body>
+</html>
