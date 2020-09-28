@@ -11,9 +11,9 @@ const dot = (v1, v2) => {
 };
 
 const getAngle = (v1, v2) => {
-  var mr = getLen(v1) * getLen(v2);
+  let mr = getLen(v1) * getLen(v2);
   if (mr === 0) return 0;
-  var r = dot(v1, v2) / mr;
+  let r = dot(v1, v2) / mr;
   if (r > 1) r = 1;
   return Math.acos(r);
 };
@@ -25,7 +25,7 @@ const cross = (v1, v2) => {
 
 //利用数学向量求出旋转角度
 const getRotateAngle = (v1, v2) => {
-  var angle = getAngle(v1, v2);
+  const angle = getAngle(v1, v2);
   if (cross(v1, v2) > 0) {
     angle *= -1;
   }
@@ -45,7 +45,7 @@ class HandlerAdmin {
   del(handler) {
     if (!handler) this.handlers = [];
 
-    for (var i = this.handlers.length; i >= 0; i--) {
+    for (let i = this.handlers.length; i >= 0; i--) {
       if (this.handlers[i] === handler) {
         this.handlers.splice(i, 1);
       }
@@ -53,8 +53,8 @@ class HandlerAdmin {
   }
 
   dispatch() {
-    for (var i = 0, len = this.handlers.length; i < len; i++) {
-      var handler = this.handlers[i];
+    for (let i = 0, len = this.handlers.length; i < len; i++) {
+      let handler = this.handlers[i];
       if (typeof handler === "function") handler.apply(this.el, arguments);
     }
   }
@@ -90,7 +90,7 @@ export default class AlloyFinger {
     this.zoom = 1;
     this.isDoubleTap = false;
 
-    var noop = function () {};
+    let noop = function () {};
 
     //旋转操作（多指旋转操作）
     this.rotate = wrapFunc(this.element, option.rotate || noop);
@@ -179,13 +179,13 @@ export default class AlloyFinger {
     this.last = this.now;
 
     //获取触摸点的数量
-    var preV = this.preV,
+    let preV = this.preV,
       len = evt.touches.length;
     if (len > 1) {
       this._cancelLongTap();
       this._cancelSingleTap();
       //如果是多手指操作的，计算出手指触摸点的位置的间距，水平间距和垂直间距
-      var v = {
+      let v = {
         x: evt.touches[1].pageX - this.x1,
         y: evt.touches[1].pageY - this.y1,
       };
@@ -210,7 +210,7 @@ export default class AlloyFinger {
 
   move(evt) {
     if (!evt.touches) return;
-    var preV = this.preV,
+    let preV = this.preV,
       len = evt.touches.length,
       currentX = evt.touches[0].pageX,
       currentY = evt.touches[0].pageY;
@@ -218,9 +218,9 @@ export default class AlloyFinger {
     this.isDoubleTap = false;
     //多个手指操作
     if (len > 1) {
-      var sCurrentX = evt.touches[1].pageX,
+      let sCurrentX = evt.touches[1].pageX,
         sCurrentY = evt.touches[1].pageY;
-      var v = {
+      let v = {
         x: evt.touches[1].pageX - currentX,
         y: evt.touches[1].pageY - currentY,
       };
@@ -259,7 +259,7 @@ export default class AlloyFinger {
 
         //move事件中添加对当前触摸点到初始触摸点的判断，
         //如果曾经大于过某个距离(比如10),就认为是移动到某个地方又移回来，应该不再触发tap事件才对。
-        var movedX = Math.abs(this.x1 - this.x2),
+        let movedX = Math.abs(this.x1 - this.x2),
           movedY = Math.abs(this.y1 - this.y2);
 
         if (movedX > 10 || movedY > 10) {
@@ -288,7 +288,7 @@ export default class AlloyFinger {
     if (!evt.changedTouches) return;
     //清除长按操作的定时器，取消长按操作
     this._cancelLongTap();
-    var self = this;
+    let self = this;
     if (evt.touches.length < 2) {
       this.multipointEnd.dispatch(evt, this.element);
       this.sx2 = this.sy2 = null;
