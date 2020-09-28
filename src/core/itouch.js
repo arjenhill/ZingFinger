@@ -25,7 +25,7 @@ const cross = (v1, v2) => {
 
 //利用数学向量求出旋转角度
 const getRotateAngle = (v1, v2) => {
-  const angle = getAngle(v1, v2);
+  let angle = getAngle(v1, v2);
   if (cross(v1, v2) > 0) {
     angle *= -1;
   }
