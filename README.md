@@ -39,6 +39,7 @@ var af = new AlloyFinger(element, {
     singleRotate: function () {},
     singleRotate: function () {},
 });
+```
 
 * [AlloyFinger](http://alloyteam.github.io/AlloyFinger/)
 * [css3transform](https://github.com/Tencent/omi/tree/master/packages/omi-transform)
