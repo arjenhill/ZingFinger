@@ -32,10 +32,6 @@ const getRotateAngle = (v1, v2) => {
   return (angle * 180) / Math.PI;
 };
 
-const hasHandler = (array) => {
-  return array.dataset.single == true;
-};
-
 class HandlerAdmin {
   constructor(el) {
     this.handlers = [];
@@ -64,26 +60,33 @@ class HandlerAdmin {
   }
 }
 
+const wrapEl = (el) => {
+  //el是手势库作用的DOM元素，el的值可以是选择器也可以是DOM元素
+  return typeof el == "string" ? document.querySelector(el) : el;
+};
 const wrapFunc = (el, handler) => {
-  console.log(el.id);
-  const single = [].slice.call(el.children).some(hasHandler);
-  if (single) {
-    // console.log(document.querySelector(`${el}`));
-  }
-
   const handlerAdmin = new HandlerAdmin(el);
   handlerAdmin.add(handler);
 
   return handlerAdmin;
 };
 
-export default class AlloyFinger {
-  //el是手势库作用的DOM元素，el的值可以是选择器也可以是DOM元素
-  //option是个数据对象，包含了所有的操作回调函数
-  constructor(el, option) {
-    // console.log(el, option);
-    this.element = typeof el == "string" ? document.querySelector(el) : el;
+const isDescendant = (parent, child) => {
+  let node = child.parentNode;
+  while (node != null) {
+    if (node == parent) {
+      return true;
+    }
+    node = node.parentNode;
+  }
+  return false;
+};
 
+export default class AlloyFinger {
+  //option是个数据对象，包含了所有的操作回调函数
+  constructor(el, option, handleEl) {
+    this.element = wrapEl(el);
+    this.handleEl = wrapEl(handleEl);
     this.start = this.start.bind(this);
     this.move = this.move.bind(this);
     this.end = this.end.bind(this);
@@ -117,7 +120,7 @@ export default class AlloyFinger {
     //捏（缩放操作）
     this.pinch = wrapFunc(this.element, option.pinch || noop);
     //单指缩放操作
-    this.singlePinch = wrapFunc(this.element, option.singlePinch || noop);
+    this.singlePinch = wrapFunc(this.handleEl, option.singlePinch || noop);
     //手指划过操作（兼容单个手指操作，多个手指操作）
     this.swipe = wrapFunc(this.element, option.swipe || noop);
     //点击操作
@@ -165,8 +168,6 @@ export default class AlloyFinger {
     this.x1 = this.x2 = this.y1 = this.y2 = null;
     //用于存储手指触摸操作时的水平坐标和垂直坐标（如果是多指触摸操作，则记录的是第一个手指触摸的位置）
     this.preTapPosition = { x: null, y: null };
-    // 是否包含单指handle
-    this.singleHandle = null;
   }
 
   start(evt) {
@@ -286,6 +287,15 @@ export default class AlloyFinger {
       }
 
       this.pressMove.dispatch(evt, this.element);
+      // 判断是否有handleElement
+      if (
+        this.handleEl &&
+        isDescendant(this.element, this.handleEl) &&
+        this.handleEl.dataset.single == "true" &&
+        evt.target == this.handleEl
+      ) {
+        this.singlePinch.dispatch(evt, this.handleEl);
+      }
     }
 
     this.touchMove.dispatch(evt, this.element);

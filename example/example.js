@@ -1,23 +1,29 @@
 var singlePinchImg = document.getElementById("singlePinchImg");
+var singlePinchButton = document.getElementById("singlePinchImg-button");
 Transform(singlePinchImg);
 var initScale = 1;
-new AlloyFinger(singlePinchImg, {
-  singlePinch: function (evt) {
-   console.log(evt);
+new AlloyFinger(
+  singlePinchImg,
+  {
+    singlePinch(evt) {
+      console.log(evt);
+    },
+    tap(evt) {},
+    singleTap() {},
+  },
+  singlePinchButton
+);
+
+var pinchImg = document.getElementById("pinchImg");
+Transform(pinchImg);
+new AlloyFinger(pinchImg, {
+  multipointStart: function () {
+    initScale = pinchImg.scaleX;
+  },
+  pinch: function (evt) {
+    pinchImg.scaleX = pinchImg.scaleY = initScale * evt.zoom;
   },
 });
-
-
-// var pinchImg = document.getElementById("pinchImg");
-// Transform(pinchImg);
-// new AlloyFinger(pinchImg, {
-//   multipointStart: function () {
-//     initScale = pinchImg.scaleX;
-//   },
-//   pinch: function (evt) {
-//     pinchImg.scaleX = pinchImg.scaleY = initScale * evt.zoom;
-//   },
-// });
 
 // var rotateImg = document.getElementById("rotateImg");
 // Transform(rotateImg);
