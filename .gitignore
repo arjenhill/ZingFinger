@@ -1,4 +1,5 @@
  .Ds_Store
 node_modules
+build
 build/docs/
 package-lock.json
