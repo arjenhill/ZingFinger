@@ -37,7 +37,6 @@ var af = new AlloyFinger(element, {
   },
   singlePinch: function () {},
   singleRotate: function () {},
-  singleRotate: function () {},
 });
 ```
 

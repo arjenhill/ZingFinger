@@ -108,6 +108,8 @@ export default class AlloyFinger {
 
     //旋转操作（多指旋转操作）
     this.rotate = wrapFunc(this.element, option.rotate || noop);
+    //旋转操作 (单指)
+    this.singleRotate = wrapFunc(this.handleEl, option.singleRotate || noop);
     //手指触摸开始
     this.touchStart = wrapFunc(this.element, option.touchStart || noop);
     //多指触摸开始
@@ -245,10 +247,13 @@ export default class AlloyFinger {
       if (preV.x !== null) {
         if (this.pinchStartLen > 0) {
           //计算出缩放比例（当前手指触摸点的直线距离 / 上一次滑动之前的手指触摸点的直线距离）
+          // console.log(this.pinchStartLen);
+          console.log(v);
           evt.zoom = getLen(v) / this.pinchStartLen;
           this.pinch.dispatch(evt, this.element);
         }
         //旋转手势操作
+        // console.log(preV);
         evt.angle = getRotateAngle(v, preV);
         this.rotate.dispatch(evt, this.element);
       }
@@ -294,7 +299,29 @@ export default class AlloyFinger {
         this.handleEl.dataset.single == "true" &&
         evt.target == this.handleEl
       ) {
+        let rect = this.element.getBoundingClientRect();
+        // console.log(rect);
+        let rectX = Math.round(rect.left);
+        let rectY = Math.round(rect.top);
+        let v = {
+          x: rectX - currentX,
+          y: rectY - currentY,
+        };
+        // preV.x = v.x;
+        // preV.y = v.y;
+
+        console.log(v);
+        // console.log(currentX, rectX , currentY, rectY);
+
+        // evt.angle = getRotateAngle(v, preV);
+ 
+        // this.pinchStartLen = getLen(preV);
+        // evt.zoom = getLen(v) / this.pinchStartLen;
+
+        // console.log(evt.zoom);
+
         this.singlePinch.dispatch(evt, this.handleEl);
+        this.singleRotate.dispatch(evt, this.handleEl);
       }
     }
 

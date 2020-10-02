@@ -18,6 +18,9 @@ body {
   font-size: 20px;
   line-height: 40px;
 }
+.example {
+  overflow: hidden;
+}
 .title {
   height: 30px;
   color: #333333;
@@ -160,15 +163,25 @@ body {
   font-size: 16px;
 }
 
+#__vconsole{
+  text-align: left;
+}
 #singlePinchImg {
   width: 160px;
   height: 160px;
   margin: 0 auto 30px auto;
   position: relative;
 }
+#singleRotateImg {
+  width: 160px;
+  margin: 0 auto 30px auto;
+}
+.single {
+  position: relative;
+}
 .button {
   position: absolute;
-  right: -115px;
+  right: -15px;
   bottom: -15px;
   width: 30px;
   height: 30px;

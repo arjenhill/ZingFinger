@@ -4,7 +4,7 @@
   "description": "",
   "main": "./build/itouch.min.js",
   "scripts": {
-    "start": "concurrently --names \"ROLLUP,HTTP\" -c \"bgBlue.bold,bgGreen.bold\" \"rollup -c -w -m inline\" \"serve --port 8080\"",
+    "start": "concurrently --names \"ROLLUP,HTTP\" -c \"bgBlue.bold,bgGreen.bold\" \"rollup -c -w -m inline\" \"serve\"",
     "lint": "eslint ./src --config=eslintrc.json",
     "build": "rollup -c --pub"
   },
