@@ -193,7 +193,7 @@ function minit() {
     return style.sheet;
   }
 
-  var base64 = "../asset/handle.png";
+  var base64 = "../../example/asset/handle.png";
 
   var _createClass = (function () {
     function defineProperties(target, props) {
@@ -436,9 +436,11 @@ function minit() {
     } else {
       // 触发 singlePinch 事件;
       if (this.use.singlePinch && isSingleButton) {
+ 
         pinchV2 = _.getVector(curPoint, this.singleBasePoint);
+        console.log(pinchV2);
         singlePinchLength = _.getLength(pinchV2);
-        console.log(singlePinchLength);
+        // console.log(singlePinchLength);
         this._eventFire("singlePinch", {
           delta: {
             scale: singlePinchLength / this.singlePinchStartLength,
@@ -698,7 +700,7 @@ function minit() {
   MTouch(".singlePinch").on(
     "singlePinch",
     function (ev) {
-      console.log(ev);
+      console.log(ev.delta.scale);
       // $singlePinchWidth += ev.delta.deltaX;
       // $singlePinchHeight += ev.delta.deltaY;
       // console.log($singlePinchWidth,$singlePinchHeight);

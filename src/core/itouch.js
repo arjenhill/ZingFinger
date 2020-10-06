@@ -32,6 +32,16 @@ const getRotateAngle = (v1, v2) => {
   return (angle * 180) / Math.PI;
 };
 
+const getVector = (p1, p2) => {
+  if (typeof p1 !== "object" || typeof p2 !== "object") {
+    console.error("getvector error!");
+    return;
+  }
+  let x = Math.round(p1.x - p2.x),
+    y = Math.round(p1.y - p2.y);
+  return { x, y };
+};
+
 class HandlerAdmin {
   constructor(el) {
     this.handlers = [];
@@ -299,26 +309,22 @@ export default class AlloyFinger {
         this.handleEl.dataset.single == "true" &&
         evt.target == this.handleEl
       ) {
-        let rect = this.element.getBoundingClientRect();
-        // console.log(rect);
-        let rectX = Math.round(rect.left);
-        let rectY = Math.round(rect.top);
-        let v = {
-          x: rectX - currentX,
-          y: rectY - currentY,
-        };
-        // preV.x = v.x;
-        // preV.y = v.y;
+        const rect = this.element.getBoundingClientRect();
+        const rectV = getVector(
+          {
+            x: currentX,
+            y: currentY,
+          },
+          { x: rect.left, y: rect.top }
+        );
 
-        console.log(v);
-        // console.log(currentX, rectX , currentY, rectY);
+        const preV = getVector(rectV, {
+          x: this.x1,
+          y: this.y1,
+        });
 
-        // evt.angle = getRotateAngle(v, preV);
- 
-        // this.pinchStartLen = getLen(preV);
-        // evt.zoom = getLen(v) / this.pinchStartLen;
-
-        // console.log(evt.zoom);
+        this.pinchStartLen = getLen(preV);
+        evt.zoom = getLen(rectV) / this.pinchStartLen;
 
         this.singlePinch.dispatch(evt, this.handleEl);
         this.singleRotate.dispatch(evt, this.handleEl);

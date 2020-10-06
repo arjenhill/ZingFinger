@@ -5,9 +5,9 @@ var initScale = 1;
 new AlloyFinger(
   singlePinchImg,
   {
-    // multipointStart: function () {
-    //   initScale = singlePinchImg.scaleX;
-    // },
+    multipointStart: function () {
+      initScale = singlePinchImg.scaleX;
+    },
     singlePinch(evt) {
       singlePinchImg.scaleX = singlePinchImg.scaleY = initScale * evt.zoom;
     },
