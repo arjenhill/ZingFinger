@@ -1,5 +1,8 @@
  .Ds_Store
 node_modules
-build
+build/itouch.js
+build/itouch.js.map
+build/itouch.min.js
+build/itouch.min.js.map
 build/docs/
 package-lock.json
