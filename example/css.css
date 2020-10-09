@@ -4,7 +4,7 @@ body {
   padding: 0;
   border: 0;
   background-color: #ccc;
-  overflow: hidden;
+  /* overflow: hidden; */
   text-align: center;
   font: 14px / 1.5 "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei",
     "Hiragino Sans GB", "Heiti SC", "WenQuanYi Micro Hei", sans-serif;
@@ -34,6 +34,7 @@ body {
 .imgBox {
   margin-bottom: 10px;
   border-bottom: 1px solid #333333;
+  overflow: hidden;
 }
 .swipeBox {
   height: 160px;

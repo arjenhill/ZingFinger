@@ -436,9 +436,8 @@ function minit() {
     } else {
       // 触发 singlePinch 事件;
       if (this.use.singlePinch && isSingleButton) {
- 
+        console.log(curPoint);
         pinchV2 = _.getVector(curPoint, this.singleBasePoint);
-        console.log(pinchV2);
         singlePinchLength = _.getLength(pinchV2);
         // console.log(singlePinchLength);
         this._eventFire("singlePinch", {
@@ -700,7 +699,7 @@ function minit() {
   MTouch(".singlePinch").on(
     "singlePinch",
     function (ev) {
-      console.log(ev.delta.scale);
+      // console.log(ev.delta.scale);
       // $singlePinchWidth += ev.delta.deltaX;
       // $singlePinchHeight += ev.delta.deltaY;
       // console.log($singlePinchWidth,$singlePinchHeight);

@@ -42,6 +42,29 @@ const getVector = (p1, p2) => {
   return { x, y };
 };
 
+const getElementLeft = (element) => {
+  var actualLeft = element.offsetLeft;
+  var current = element.offsetParent;
+
+  while (current !== null) {
+    actualLeft += current.offsetLeft;
+    current = current.offsetParent;
+  }
+
+  return actualLeft;
+};
+
+const getElementTop = (element) => {
+  var actualTop = element.offsetTop;
+  var current = element.offsetParent;
+
+  while (current !== null) {
+    actualTop += current.offsetTop;
+    current = current.offsetParent;
+  }
+  return actualTop;
+};
+
 class HandlerAdmin {
   constructor(el) {
     this.handlers = [];
@@ -309,13 +332,15 @@ export default class AlloyFinger {
         this.handleEl.dataset.single == "true" &&
         evt.target == this.handleEl
       ) {
-        const rect = this.element.getBoundingClientRect();
         const rectV = getVector(
           {
             x: currentX,
             y: currentY,
           },
-          { x: rect.left, y: rect.top }
+          {
+            x: getElementTop(this.element) + this.element.offsetHeight / 2,
+            y: getElementLeft(this.element) + this.element.offsetWidth / 2,
+          }
         );
 
         const preV = getVector(rectV, {
@@ -328,6 +353,8 @@ export default class AlloyFinger {
 
         this.singlePinch.dispatch(evt, this.handleEl);
         this.singleRotate.dispatch(evt, this.handleEl);
+        // 是否为在handleElement上，禁止touch与屏幕滑动的冲突
+        evt.preventDefault();
       }
     }
 
