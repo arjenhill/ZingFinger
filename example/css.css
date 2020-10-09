@@ -34,7 +34,6 @@ body {
 .imgBox {
   margin-bottom: 10px;
   border-bottom: 1px solid #333333;
-  overflow: hidden;
 }
 .swipeBox {
   height: 160px;

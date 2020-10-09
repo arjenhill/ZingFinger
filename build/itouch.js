@@ -327,7 +327,6 @@ var AlloyFinger = function () {
           if (this.pinchStartLen > 0) {
             //计算出缩放比例（当前手指触摸点的直线距离 / 上一次滑动之前的手指触摸点的直线距离）
             // console.log(this.pinchStartLen);
-            console.log(v);
             evt.zoom = getLen(v) / this.pinchStartLen;
             this.pinch.dispatch(evt, this.element);
           }
@@ -373,14 +372,15 @@ var AlloyFinger = function () {
         this.pressMove.dispatch(evt, this.element);
         // 判断是否有handleElement
         if (this.handleEl && isDescendant(this.element, this.handleEl) && this.handleEl.dataset.single == "true" && evt.target == this.handleEl) {
+          var startV = {
+            x: getElementLeft(this.element) + this.element.offsetWidth / 4,
+            y: getElementTop(this.element) + this.element.offsetHeight / 4
+          };
+
           var rectV = getVector({
             x: currentX,
             y: currentY
-          }, {
-            x: getElementTop(this.element) + this.element.offsetHeight / 2,
-            y: getElementLeft(this.element) + this.element.offsetWidth / 2
-          });
-
+          }, startV);
           var _preV = getVector(rectV, {
             x: this.x1,
             y: this.y1
@@ -389,7 +389,19 @@ var AlloyFinger = function () {
           this.pinchStartLen = getLen(_preV);
           evt.zoom = getLen(rectV) / this.pinchStartLen;
 
+          // 单指缩放
           this.singlePinch.dispatch(evt, this.handleEl);
+          // 单指旋转
+          var baseV = getVector({
+            x: currentX,
+            y: currentY
+          }, startV);
+
+          var rotateV2 = getVector(rectV, {
+            x: this.x1,
+            y: this.y1
+          });
+          evt.angle = getRotateAngle(baseV, rotateV2) / 100;
           this.singleRotate.dispatch(evt, this.handleEl);
           // 是否为在handleElement上，禁止touch与屏幕滑动的冲突
           evt.preventDefault();

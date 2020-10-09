@@ -11,6 +11,9 @@ new AlloyFinger(
     singlePinch(evt) {
       singlePinchImg.scaleX = singlePinchImg.scaleY = initScale * evt.zoom;
     },
+    pinch(evt) {
+      singlePinchImg.scaleX = singlePinchImg.scaleY = initScale * evt.zoom;
+    },
     tap(evt) {},
     singleTap() {},
   },

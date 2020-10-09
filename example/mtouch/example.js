@@ -436,7 +436,6 @@ function minit() {
     } else {
       // 触发 singlePinch 事件;
       if (this.use.singlePinch && isSingleButton) {
-        console.log(curPoint);
         pinchV2 = _.getVector(curPoint, this.singleBasePoint);
         singlePinchLength = _.getLength(pinchV2);
         // console.log(singlePinchLength);
@@ -452,14 +451,16 @@ function minit() {
       }
       // 触发 singleRotate 事件;
       if (this.use.singleRotate && isSingleButton) {
+        console.log(this.startPoint);
         rotateV1 = _.getVector(this.startPoint, this.singleBasePoint);
         rotateV2 = _.getVector(curPoint, this.singleBasePoint);
-        this._eventFire("singleRotate", {
-          delta: {
-            rotate: _.getAngle(rotateV1, rotateV2),
-          },
-          origin: ev,
-        });
+        // console.log(rotateV1, rotateV2);
+        // this._eventFire("singleRotate", {
+        //   delta: {
+        //     rotate: _.getAngle(rotateV1, rotateV2),
+        //   },
+        //   origin: ev,
+        // });
       }
     }
     // 触发 drag 事件；
