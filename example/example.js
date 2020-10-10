@@ -27,6 +27,11 @@ new AlloyFinger(
   singleRotateImg,
   {
     singleRotate(evt) {
+      // console.log(singleRotateImg.rotateZ);
+      singleRotateImg.rotateZ += evt.angle;
+    },
+    rotate(evt) {
+      // console.log(singleRotateImg.rotateZ);
       singleRotateImg.rotateZ += evt.angle;
     },
     tap(evt) {},

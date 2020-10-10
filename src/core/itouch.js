@@ -32,39 +32,6 @@ const getRotateAngle = (v1, v2) => {
   return (angle * 180) / Math.PI;
 };
 
-const getVector = (p1, p2) => {
-  if (typeof p1 !== "object" || typeof p2 !== "object") {
-    console.error("getvector error!");
-    return;
-  }
-  let x = Math.round(p1.x - p2.x),
-    y = Math.round(p1.y - p2.y);
-  return { x, y };
-};
-
-const getElementLeft = (element) => {
-  var actualLeft = element.offsetLeft;
-  var current = element.offsetParent;
-
-  while (current !== null) {
-    actualLeft += current.offsetLeft;
-    current = current.offsetParent;
-  }
-
-  return actualLeft;
-};
-
-const getElementTop = (element) => {
-  var actualTop = element.offsetTop;
-  var current = element.offsetParent;
-
-  while (current !== null) {
-    actualTop += current.offsetTop;
-    current = current.offsetParent;
-  }
-  return actualTop;
-};
-
 class HandlerAdmin {
   constructor(el) {
     this.handlers = [];
@@ -285,8 +252,8 @@ export default class AlloyFinger {
           this.pinch.dispatch(evt, this.element);
         }
         //旋转手势操作
-        // console.log(preV);
         evt.angle = getRotateAngle(v, preV);
+        // console.log(v, preV);
         this.rotate.dispatch(evt, this.element);
       }
       preV.x = v.x;
@@ -332,42 +299,44 @@ export default class AlloyFinger {
         evt.target == this.handleEl
       ) {
         const startV = {
-          x: getElementLeft(this.element) + this.element.offsetWidth / 4,
-          y: getElementTop(this.element) + this.element.offsetHeight / 4,
+          x: this.handleEl.offsetLeft - this.handleEl.offsetWidth / 4,
+          y: this.handleEl.offsetTop - this.handleEl.offsetHeight / 4,
         };
-
-        const rectV = getVector(
-          {
-            x: currentX,
-            y: currentY,
-          },
-          startV
-        );
-        const preV = getVector(rectV, {
-          x: this.x1,
-          y: this.y1,
-        });
+        const rectV = {
+          x: currentX - startV.x,
+          y: currentY - startV.y,
+        };
+        const preV = {
+          x: rectV.x - this.x1,
+          y: rectV.y - this.y1,
+        };
 
         this.pinchStartLen = getLen(preV);
         evt.zoom = getLen(rectV) / this.pinchStartLen;
-
         // 单指缩放
         this.singlePinch.dispatch(evt, this.handleEl);
-        // 单指旋转
-        const baseV = getVector(
-          {
-            x: currentX,
-            y: currentY,
-          },
-          startV
-        );
 
-        const rotateV2 = getVector(rectV, {
-          x: this.x1,
-          y: this.y1,
-        });
-        evt.angle = getRotateAngle(baseV, rotateV2) / 100;
-        this.singleRotate.dispatch(evt, this.handleEl);
+        // 单指旋转
+        const rotateV2 = {
+          x: rectV.x - currentX,
+          y: rectV.y - currentY,
+        };
+        evt.angle = getRotateAngle(rotateV2, preV);
+
+        // startV.x = rotateV2.x;
+        // startV.y = rotateV2.y;
+        // preV.x = rotateV2.x;
+        // preV.y = rotateV2.y;
+        console.log(preV.x, rotateV2.x, Math.abs(preV.x - rotateV2.x));
+        if (Math.abs(preV.x - rotateV2.x) > 5) {
+          // this.singleRotate.dispatch(evt, this.handleEl);
+        }
+        // console.log(this.preTapPosition);
+        // this.cancelAll();
+        // this._cancelLongTap();
+        // this._cancelSingleTap();
+        // this._cancelSingleTap();
+        // this.touchCancel.dispatch(evt, this.handleEl);
         // 是否为在handleElement上，禁止touch与屏幕滑动的冲突
         evt.preventDefault();
       }

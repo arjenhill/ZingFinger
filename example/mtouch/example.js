@@ -455,12 +455,12 @@ function minit() {
         rotateV1 = _.getVector(this.startPoint, this.singleBasePoint);
         rotateV2 = _.getVector(curPoint, this.singleBasePoint);
         // console.log(rotateV1, rotateV2);
-        // this._eventFire("singleRotate", {
-        //   delta: {
-        //     rotate: _.getAngle(rotateV1, rotateV2),
-        //   },
-        //   origin: ev,
-        // });
+        this._eventFire("singleRotate", {
+          delta: {
+            rotate: _.getAngle(rotateV1, rotateV2),
+          },
+          origin: ev,
+        });
       }
     }
     // 触发 drag 事件；
