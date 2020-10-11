@@ -10,7 +10,7 @@ You can touch this → [Demo example](https://ilgei.github.io/ZingFinger/example
 
 # Usage
 
-## npm
+## NPM
 
 [![zingfinger](https://nodei.co/npm/zingfinger.png)](https://npmjs.org/package/zingfinger)
 
@@ -20,7 +20,7 @@ Install the library with npm into your local modules directory:
 npm install zingfinger --save
 ```
 
-## Cdn
+## CDN
 
 [![](https://img.shields.io/badge/jsDelivr-CDN-red.svg)](https://www.jsdelivr.com/package/npm/zingfinger)
 [![](https://img.shields.io/badge/UNPKG-CDN-red.svg)](https://unpkg.com/zingfinger/)
