@@ -1,8 +1,8 @@
 {
-  "name": "itouch",
+  "name": "zingfinger",
   "version": "0.1.0",
-  "description": "",
-  "main": "./build/itouch.min.js",
+  "description": "super tiny size multi-touch gestures library for the web",
+  "main": "./build/zingfinger.min.js",
   "scripts": {
     "start": "concurrently --names \"ROLLUP,HTTP\" -c \"bgBlue.bold,bgGreen.bold\" \"rollup -c -w -m inline\" \"serve\"",
     "lint": "eslint ./src --config=eslintrc.json",

@@ -1,12 +1,12 @@
-# `AlloyFinger (Enhanced Edition)`
+# `ZingFinger (Enhanced Edition)`
 
-AlloyFinger Super tiny size multi-touch gestures library for the web.
+ZingFinger Super tiny size multi-touch gestures library for the web.
 
 Enhanced Edition: add singlePinch singleRotate singleRotate
 
 # Preview
 
-You can touch this → [https://ilgei.github.io/AlloyFinger/example/](https://ilgei.github.io/AlloyFinger/example/)
+You can touch this → [https://ilgei.github.io/ZingFinger/example/](https://ilgei.github.io/ZingFinger/example/)
 
 # Usage
 
@@ -35,8 +35,12 @@ var af = new AlloyFinger(element, {
   swipe: function (evt) {
     console.log("swipe" + evt.direction);
   },
-  singlePinch: function () {},
-  singleRotate: function () {},
+  singlePinch: function (evt) {
+    console.log(evt.zoom);
+  },
+  singleRotate: function (evt) {
+    console.log(evt.angle);
+  },
 });
 ```
 

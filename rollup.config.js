@@ -6,7 +6,7 @@ import { minify } from 'uglify-es';
 import pkjson from './package.json';
 
 const prjName = pkjson.name;
-const outputModuleName = 'AlloyFinger';
+const outputModuleName = 'ZingFinger';
 
 const banner = `/*!
 * ${prjName} v${pkjson.version}

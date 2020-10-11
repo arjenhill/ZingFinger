@@ -1,7 +1,4 @@
-//两个手指触点间直线的距离
-//多指触点操作的时候，v.x表示手指触点之间的水平间距，v.y表示垂直间距，利用勾股定理的公式计算出手指触点之间的直线距离
-//详解：将v.x的水平间距和v.y的垂直间距用直线连接起来，就形成了一个直角三角形的两条垂直边，指触点之间的直线距离就代表直角三角形的斜边
-//那么利用勾股定理公式就可以很容易的计算出斜边的长度，也就是手指触点之间的直线距离
+//利用勾股定理公式就可以很容易的计算出斜边的长度，也就是手指触点之间的直线距离
 const getLen = (v) => {
   return Math.sqrt(v.x * v.x + v.y * v.y);
 };
@@ -10,6 +7,7 @@ const dot = (v1, v2) => {
   return v1.x * v2.x + v1.y * v2.y;
 };
 
+// 计算弧度
 const getAngle = (v1, v2) => {
   let mr = getLen(v1) * getLen(v2);
   if (mr === 0) return 0;
@@ -30,6 +28,25 @@ const getRotateAngle = (v1, v2) => {
     angle *= -1;
   }
   return (angle * 180) / Math.PI;
+};
+
+const getOffset = (el) => {
+  let rect = el.getBoundingClientRect();
+  let offset = {
+    left: rect.left + document.body.scrollLeft,
+    top: rect.top + document.body.scrollTop,
+    width: el.offsetWidth,
+    height: el.offsetHeight,
+  };
+  return offset;
+};
+
+const getMidpoint = (el) => {
+  if (!el) return { x: 0, y: 0 };
+  let offset = getOffset(el);
+  let x = offset.left + el.getBoundingClientRect().width / 2,
+    y = offset.top + el.getBoundingClientRect().width / 2;
+  return { x: Math.round(x), y: Math.round(y) };
 };
 
 class HandlerAdmin {
@@ -61,7 +78,6 @@ class HandlerAdmin {
 }
 
 const wrapEl = (el) => {
-  //el是手势库作用的DOM元素，el的值可以是选择器也可以是DOM元素
   return typeof el == "string" ? document.querySelector(el) : el;
 };
 const wrapFunc = (el, handler) => {
@@ -82,7 +98,7 @@ const isDescendant = (parent, child) => {
   return false;
 };
 
-export default class AlloyFinger {
+export default class ZingFinger {
   //option是个数据对象，包含了所有的操作回调函数
   constructor(el, option, handleEl) {
     this.element = wrapEl(el);
@@ -133,7 +149,6 @@ export default class AlloyFinger {
     this.longTap = wrapFunc(this.element, option.longTap || noop);
     //点击操作
     //tap操作和singleTap操作的区别在于，如果是在一定时间内只是单击一次的话，触发的操作顺序是tap->singleTap
-    //如果是在一定时间内连续多次点击的话（包括双击操作），只会执行tap操作，不会执行singleTap操作
     //singleTap操作其实就类似于鼠标click事件，click事件作用到移动端页面的时候，会存在延时触发事件，会先触发touch事件再执行click事件
     this.singleTap = wrapFunc(this.element, option.singleTap || noop);
     //单个手指触摸滑动操作
@@ -253,7 +268,6 @@ export default class AlloyFinger {
         }
         //旋转手势操作
         evt.angle = getRotateAngle(v, preV);
-        // console.log(v, preV);
         this.rotate.dispatch(evt, this.element);
       }
       preV.x = v.x;
@@ -298,15 +312,18 @@ export default class AlloyFinger {
         this.handleEl.dataset.single == "true" &&
         evt.target == this.handleEl
       ) {
+        const basePoint = getMidpoint(this.element);
+
         const startV = {
           x: this.handleEl.offsetLeft - this.handleEl.offsetWidth / 4,
           y: this.handleEl.offsetTop - this.handleEl.offsetHeight / 4,
         };
+
         const rectV = {
           x: currentX - startV.x,
           y: currentY - startV.y,
         };
-        const preV = {
+        preV = {
           x: rectV.x - this.x1,
           y: rectV.y - this.y1,
         };
@@ -318,25 +335,14 @@ export default class AlloyFinger {
 
         // 单指旋转
         const rotateV2 = {
-          x: rectV.x - currentX,
-          y: rectV.y - currentY,
+          x: basePoint.x - currentX,
+          y: basePoint.y - currentY,
         };
-        evt.angle = getRotateAngle(rotateV2, preV);
 
-        // startV.x = rotateV2.x;
-        // startV.y = rotateV2.y;
-        // preV.x = rotateV2.x;
-        // preV.y = rotateV2.y;
-        console.log(preV.x, rotateV2.x, Math.abs(preV.x - rotateV2.x));
-        if (Math.abs(preV.x - rotateV2.x) > 5) {
-          // this.singleRotate.dispatch(evt, this.handleEl);
-        }
-        // console.log(this.preTapPosition);
-        // this.cancelAll();
-        // this._cancelLongTap();
-        // this._cancelSingleTap();
-        // this._cancelSingleTap();
-        // this.touchCancel.dispatch(evt, this.handleEl);
+        evt.angle = getRotateAngle(rotateV2, preV);
+        preV.x = rotateV2.x;
+        preV.y = rotateV2.y;
+        this.singleRotate.dispatch(evt, this.handleEl);
         // 是否为在handleElement上，禁止touch与屏幕滑动的冲突
         evt.preventDefault();
       }
@@ -457,10 +463,12 @@ export default class AlloyFinger {
 
     //取消所有的订阅
     this.rotate.del();
+    this.singleRotate.del();
     this.touchStart.del();
     this.multipointStart.del();
     this.multipointEnd.del();
     this.pinch.del();
+    ths.singlePinch.del();
     this.swipe.del();
     this.tap.del();
     this.doubleTap.del();
@@ -473,7 +481,7 @@ export default class AlloyFinger {
     this.touchCancel.del();
 
     //自空所有的数据
-    this.preV = this.pinchStartLen = this.zoom = this.isDoubleTap = this.delta = this.last = this.now = this.tapTimeout = this.singleTapTimeout = this.longTapTimeout = this.swipeTimeout = this.x1 = this.x2 = this.y1 = this.y2 = this.preTapPosition = this.rotate = this.touchStart = this.multipointStart = this.multipointEnd = this.pinch = this.swipe = this.tap = this.doubleTap = this.longTap = this.singleTap = this.pressMove = this.touchMove = this.touchEnd = this.touchCancel = this.twoFingerPressMove = null;
+    this.preV = this.pinchStartLen = this.zoom = this.isDoubleTap = this.delta = this.last = this.now = this.tapTimeout = this.singleTapTimeout = this.longTapTimeout = this.swipeTimeout = this.x1 = this.x2 = this.y1 = this.y2 = this.preTapPosition = this.rotate = this.singleRotate = this.touchStart = this.multipointStart = this.multipointEnd = this.pinch = this.singlePinch = this.swipe = this.tap = this.doubleTap = this.longTap = this.singleTap = this.pressMove = this.touchMove = this.touchEnd = this.touchCancel = this.twoFingerPressMove = null;
 
     window.removeEventListener("scroll", this._cancelAllHandler);
     return null;

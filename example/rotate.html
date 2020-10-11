@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0,maximum-scale=1.0,minimum=1.0,user-scalable=no,viewport-fit=cover"
+    />
+    <title>rotate</title>
+    <script src="../asset/transform.js"></script>
+  </head>
+  <style>
+    body {
+      overflow: hidden;
+      margin: 0;
+    }
+    #box {
+      width: 200px;
+      height: 200px;
+      background: #ff0000;
+    }
+  </style>
+
+  <body>
+    <div id="box"></div>
+    <div id="text">rotate</div>
+    <script>
+      function cross(v1, v2) {
+        return v1.x * v2.y - v2.x * v1.y;
+      }
+
+      function getLen(v) {
+        return Math.sqrt(v.x * v.x + v.y * v.y);
+      }
+
+      function dot(v1, v2) {
+        return v1.x * v2.x + v1.y * v2.y;
+      }
+
+      function getAngle(v1, v2) {
+        let mr = getLen(v1) * getLen(v2);
+        if (mr === 0) return 0;
+        let r = dot(v1, v2) / mr;
+        if (r > 1) r = 1; // Math.acos(1)=0
+        return Math.acos(r);
+      }
+
+      function getRotateAngle(v1, v2) {
+        let angle = getAngle(v1, v2);
+        if (cross(v1, v2) > 0) {
+          angle *= -1;
+        }
+        return (angle * 180) / Math.PI;
+      }
+
+      function rotate(el, fn) {
+        let preV = { x: null, y: null };
+        el.addEventListener("touchmove", function (e) {
+          if (e.touches.length > 1) {
+            let currentX = e.touches[0].pageX,
+              currentY = e.touches[0].pageY,
+              v = {
+                x: e.touches[1].pageX - currentX,
+                y: e.touches[1].pageY - currentY,
+              };
+            e.angle = getRotateAngle(v, preV);
+            if (preV.x !== null) {
+              fn && fn.call(el, e);
+            }
+            preV.x = v.x;
+            preV.y = v.y;
+          } else {
+            let currentX = e.touches[0].pageX;
+            let currentY = e.touches[0].pageY;
+            console.log(currentX, currentY);
+            v = {
+              x: 100 - currentX,
+              y: 100 - currentY,
+            };
+            e.angle = getRotateAngle(v, preV);
+            if (preV.x !== null) {
+              fn && fn.call(el, e);
+            }
+            preV.x = v.x;
+            preV.y = v.y;
+          }
+        });
+      }
+      let box = document.getElementById("box");
+      let text = document.getElementById("text");
+      Transform(box);
+      rotate(box, (e) => {
+        box.rotateZ += e.angle;
+        text.innerHTML = e.angle;
+      });
+    </script>
+  </body>
+</html>

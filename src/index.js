@@ -1,3 +1,3 @@
-import AlloyFinger from "./core/itouch";
+import ZingFinger from "./core/zingfinger";
 
-export default AlloyFinger;
+export default ZingFinger;

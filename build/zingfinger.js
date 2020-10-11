@@ -524,4 +524,4 @@ var ZingFinger = function () {
 return ZingFinger;
 
 })));
-//# sourceMappingURL=itouch.js.map
+//# sourceMappingURL=zingfinger.js.map

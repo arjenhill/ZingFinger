@@ -2,7 +2,7 @@ var singlePinchImg = document.getElementById("singlePinchImg");
 var singlePinchButton = document.getElementById("singlePinchImg-button");
 Transform(singlePinchImg);
 var initScale = 1;
-new AlloyFinger(
+new ZingFinger(
   singlePinchImg,
   {
     multipointStart: function () {
@@ -23,12 +23,11 @@ new AlloyFinger(
 var singleRotateImg = document.getElementById("singleRotateImg");
 var singleRotateButton = document.getElementById("singleRotateImg-button");
 Transform(singleRotateImg);
-new AlloyFinger(
+new ZingFinger(
   singleRotateImg,
   {
     singleRotate(evt) {
-      // console.log(singleRotateImg.rotateZ);
-      singleRotateImg.rotateZ += evt.angle;
+      singleRotateImg.rotateZ = evt.angle;
     },
     rotate(evt) {
       // console.log(singleRotateImg.rotateZ);
@@ -42,7 +41,7 @@ new AlloyFinger(
 
 var pinchImg = document.getElementById("pinchImg");
 Transform(pinchImg);
-new AlloyFinger(pinchImg, {
+new ZingFinger(pinchImg, {
   multipointStart: function () {
     initScale = pinchImg.scaleX;
   },
@@ -53,7 +52,7 @@ new AlloyFinger(pinchImg, {
 
 var rotateImg = document.getElementById("rotateImg");
 Transform(rotateImg);
-new AlloyFinger(rotateImg, {
+new ZingFinger(rotateImg, {
   rotate: function (evt) {
     rotateImg.rotateZ += evt.angle;
   },
@@ -61,7 +60,7 @@ new AlloyFinger(rotateImg, {
 
 var pinchRotateImg = document.getElementById("pinchRotateImg");
 Transform(pinchRotateImg);
-new AlloyFinger(pinchRotateImg, {
+new ZingFinger(pinchRotateImg, {
   rotate: function (evt) {
     pinchRotateImg.rotateZ += evt.angle;
   },
@@ -75,7 +74,7 @@ new AlloyFinger(pinchRotateImg, {
 
 var pressMoveImg = document.getElementById("pressMoveImg");
 Transform(pressMoveImg);
-new AlloyFinger(pressMoveImg, {
+new ZingFinger(pressMoveImg, {
   pressMove: function (evt) {
     pressMoveImg.translateX += evt.deltaX;
     pressMoveImg.translateY += evt.deltaY;
@@ -88,7 +87,7 @@ function ease(x) {
 }
 var doubleTapImg = document.getElementById("doubleTapImg");
 Transform(doubleTapImg);
-new AlloyFinger(doubleTapImg, {
+new ZingFinger(doubleTapImg, {
   doubleTap: function () {
     if (doubleTapImg.scaleX === 1) {
       new To(doubleTapImg, "scaleX", 2, 500, ease);
@@ -115,7 +114,7 @@ function activeNav(index) {
     }
   }
 }
-new AlloyFinger(swipeScroll, {
+new ZingFinger(swipeScroll, {
   touchMove: function (evt) {
     if (Math.abs(evt.deltaX) >= Math.abs(evt.deltaY)) {
       evt.preventDefault();
@@ -157,7 +156,7 @@ new AlloyFinger(swipeScroll, {
 var longTapBox = document.getElementById("longTapBox");
 Transform(longTapBox);
 var overlay = document.getElementById("overlay");
-new AlloyFinger(longTapBox, {
+new ZingFinger(longTapBox, {
   longTap: function (evt) {
     evt.preventDefault();
     toggleDom(overlay);
@@ -167,7 +166,7 @@ new AlloyFinger(longTapBox, {
 var tapBox = document.getElementById("tapBox");
 Transform(tapBox);
 var overlay2 = document.getElementById("overlay2");
-new AlloyFinger(tapBox, {
+new ZingFinger(tapBox, {
   tap: function () {
     toggleDom(overlay2);
   },
