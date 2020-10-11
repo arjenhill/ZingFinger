@@ -10,6 +10,21 @@ You can touch this → [Demo example](https://ilgei.github.io/ZingFinger/example
 
 # Usage
 
+## npm
+
+[![zingfinger](https://nodei.co/npm/zingfinger.png)](https://npmjs.org/package/zingfinger)
+
+Install the library with npm into your local modules directory:
+
+```js
+npm install zingfinger --save
+```
+
+## Cdn
+
+[![](https://img.shields.io/badge/jsDelivr-CDN-red.svg)](https://www.jsdelivr.com/package/npm/zingfinger)
+[![](https://img.shields.io/badge/UNPKG-CDN-red.svg)](https://unpkg.com/zingfinger/)
+
 ## JavaScript
 
 ```js
@@ -62,7 +77,7 @@ var h = new Vue({
 // import
 import Vue from "vue";
 import ZingFinger from "zingfinger";
-import ZingFingerPlugin from "zingfinger/vue/zingfinger";
+import ZingFingerPlugin from "zingfinger/plugin/vue/zingfinger";
 Vue.use(ZingFingerPlugin, {
   ZingFinger,
 });
