@@ -1,5 +1,10 @@
 # `ZingFinger`
 
+[![npm version](https://img.shields.io/npm/v/zingfinger.svg)](https://www.npmjs.com/package/zingfinger)
+[![gzip size](https://img.shields.io/bundlephobia/minzip/zingfinger.svg?label=gzip%20size)](https://www.npmjs.com/package/zingfinger)
+[![monthly npm installs](https://img.shields.io/npm/dm/zingfinger.svg?label=npm%20downloads)](https://www.npmjs.com/package/zingfinger)
+![license](https://img.shields.io/badge/license-MIT-blue.svg)
+
 ZingFinger Super tiny size multi-touch gestures library for the web.
 
 Enhanced Edition: add singlePinch singleRotate singleRotate
