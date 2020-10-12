@@ -175,7 +175,11 @@ body {
 }
 #singleRotateImg {
   width: 160px;
-  margin: 0 auto 30px auto;
+  margin: 0 auto 15px auto;
+}
+.no-handle{
+  display: block;
+  padding-bottom: 20px;
 }
 .single {
   position: relative;
