@@ -100,7 +100,7 @@ Vue.use(ZingFingerPlugin, {
 
 Expect to contribute
 
-# Consult
+# Reference
 
 - [AlloyFinger](http://alloyteam.github.io/AlloyFinger/)
 - [css3transform](https://github.com/Tencent/omi/tree/master/packages/omi-transform)
