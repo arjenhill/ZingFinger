@@ -33,7 +33,7 @@ npm install zingfinger --save
 ## JavaScript
 
 ```js
-var af = new AlloyFinger(element, {
+var af = new ZingFinger(element, {
   touchStart: function () {},
   touchMove: function () {},
   touchEnd: function () {},
