@@ -2,6 +2,7 @@
   "name": "zingfinger",
   "version": "0.1.0",
   "description": "super tiny size multi-touch gestures library for the web",
+  "homepage": "https://github.com/ilgei/zingfinger",
   "main": "./build/zingfinger.min.js",
   "scripts": {
     "start": "concurrently --names \"ROLLUP,HTTP\" -c \"bgBlue.bold,bgGreen.bold\" \"rollup -c -w -m inline\" \"serve\"",
