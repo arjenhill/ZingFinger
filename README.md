@@ -13,6 +13,8 @@ Enhanced Edition: add singlePinch singleRotate singleRotate
 
 You can touch this → [Demo example](https://ilgei.github.io/ZingFinger/example/)
 
+![img](./example/asset/example.gif)
+
 # Usage
 
 ## NPM
